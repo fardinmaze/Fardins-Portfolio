@@ -7,7 +7,7 @@ defineProps({ project: { type: Object, required: true }, n: { type: String, defa
 
 <template>
   <article class="card hoverable" data-cursor="VIEW">
-    <ShotFrame :index="n" :name="project.name" label="project visual" ratio="4 / 3" />
+    <ShotFrame :src="project.cover?.src" :alt="project.cover?.alt" :index="n" :name="project.name" label="project visual" ratio="4 / 3" />
     <div class="info">
       <CategoryTag :cat="project.cat" />
       <h2 class="name">{{ project.name }}</h2>

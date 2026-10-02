@@ -18,9 +18,10 @@ defineProps({ next: { type: Object, required: true } })
           <CategoryTag :cat="next.cat" />
           <p class="name">{{ next.name }}</p>
           <p class="head"><template v-if="next.headline">{{ next.headline }}</template><span v-else class="tbc">Add outcome headline</span></p>
+          <p v-if="next.description" class="blurb">{{ next.description }}</p>
           <span class="link-arrow go">View project <span class="arr">→</span></span>
         </div>
-        <div class="vis"><ShotFrame :name="next.name" label="project visual" ratio="16 / 9" /></div>
+        <div class="vis"><ShotFrame :src="next.cover?.src" :alt="next.cover?.alt" :name="next.name" label="project visual" ratio="16 / 9" /></div>
       </RouterLink>
     </div>
   </section>
@@ -40,6 +41,7 @@ defineProps({ next: { type: Object, required: true } })
 .vis { grid-column: 6 / span 7; }
 .name { font-size: clamp(2.4rem, 5.4vw, 4.4rem); font-weight: 800; letter-spacing: -0.05em; line-height: 0.95; text-transform: uppercase; color: var(--text); overflow-wrap: anywhere; }
 .head { font-size: clamp(1.15rem, 1.8vw, 1.5rem); color: var(--body); letter-spacing: -0.02em; line-height: 1.2; }
+.blurb { color: var(--muted); font-size: 1rem; max-width: 28em; }
 .go { color: var(--text); margin-top: 8px; }
 @media (max-width: 899px) { .txt, .vis { grid-column: 1 / -1; } .card { row-gap: 24px; } .vis { order: -1; } }
 @media (prefers-reduced-motion: reduce) { .card:hover { transform: none; } }

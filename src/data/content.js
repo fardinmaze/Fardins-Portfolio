@@ -7,7 +7,7 @@ export const profile = {
   role: 'Product Analyst & Designer',
   email: 'mazumder.mdfardin@gmail.com',
   calendly: 'https://calendly.com/mazumderfardin/15min',
-  linkedin: 'https://www.linkedin.com/', // TODO: replace with the exact profile URL
+  linkedin: 'https://www.linkedin.com/in/mazumderfardin/',
 }
 
 export const nav = [

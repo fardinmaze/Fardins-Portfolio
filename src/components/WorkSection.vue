@@ -98,7 +98,7 @@ onBeforeUnmount(() => ctx?.revert())
               </div>
             </div>
             <div class="visual" data-cursor="VIEW">
-              <ShotFrame :index="pad(i)" :name="p.name" label="project visual" ratio="auto" />
+              <ShotFrame :src="p.cover?.src" :alt="p.cover?.alt" :index="pad(i)" :name="p.name" label="project visual" ratio="auto" />
             </div>
           </li>
         </ol>
