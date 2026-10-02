@@ -98,6 +98,12 @@ Verified: handler (405, bad body, validation, honeypot, 503 without key, success
 - No screenshots for either yet (hero placeholder plus one or two inline placeholders each).
 - Verified in Edge (static build): both pages, meta rows, filters, 4-card stack ends at 04/04, Experiments rows, mobile no overflow, zero console errors.
 
+### Update (same day): categories moved, Balanti screenshots
+- **Categories changed at the owner's request:** QuickCV and ReportMate are now **Design**; Hikmah and Afsha Hossain are now **Design & Build**; Design System Bootstrapper stays **Build**. Balanti stays Design & Build. Result on `/work`: Design 5 (QuickCV, Go for Change, ReportMate, NeduAI, Portulika), Build 1 (Design System Bootstrapper), Design & Build 3 (Balanti, Afsha Hossain, Hikmah). The QuickCV story still contains the owner's DESIGN and BUILD closing blocks; left as written.
+- **Balanti screenshots** captured from the live site https://balanti.com.au/ (a Vue storefront with its API at api.balanti.com.au) and saved as WebP in `public/work/balanti/`: home (used as the cover), catalogue, product page, plus two mobile screens (~330 KB total). Placed in the Shopping Journey and From Interface to Working MVP sections, replacing the placeholders. "Visit site" now links to balanti.com.au. The captures are screenshots of the storefront as of today (the hero video was mid-animation in the mobile home shot), so re-capture if the site changes.
+- **Afsha Hossain:** no website could be found (web search returned nothing; common domains and vercel/netlify names did not resolve). Its images are still placeholders until the owner supplies the address.
+- Verified in Edge (static build): filters and chip counts, every category tag, Balanti images (5/5 load), Visit site link, home stack shows the real Balanti cover, mobile no overflow, zero console errors.
+
 ### Design system (superseded by the revert above)
 Palette and font switched to the system specified in the brief: bg `#080C0E`, surface `#10171A` / `#172125`, primary `#4F7A8A`, hover `#638F9F`, accent `#22D3EE`, text `#F4F7F8`, body `#D3DCE0`, muted `#8A989E`, border `#263237`, font Geist (Inter fallback).
 - **Note:** the previous iteration used lime on near-black. The brief said "keep the existing system" but listed these teal/cyan values, so the listed values were applied. Say if you actually wanted lime kept.

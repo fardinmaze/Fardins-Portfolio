@@ -3,6 +3,9 @@
 // Product Detail Experience, Responsive E-commerce, Designing the Foundation, Why This Workflow Matters,
 // the Design & Build summary, MVP Approach, Reflection, and the closing DESIGN / BUILD blocks.
 
+// Screenshots of the live storefront (balanti.com.au), captured for this portfolio.
+const shot = (file, alt, w, h, span = 'full') => ({ src: `/work/balanti/${file}`, alt, w, h, span })
+
 export const balantiIntro = [
   'Balanti is an Australia-based footwear retailer focused on premium leather shoes, including Oxfords and loafers.',
   "The project involved designing and building an e-commerce MVP that translates the brand's physical retail experience into a focused digital storefront.",
@@ -40,7 +43,13 @@ export const balantiStory = [
         ],
       },
       { t: 'p', x: 'The design goal was to keep the customer focused on the product rather than the interface itself.' },
-      { t: 'figure', placeholder: 'storefront screens' },
+      {
+        t: 'figure',
+        images: [
+          shot('02-catalogue.webp', 'Balanti men catalogue with category, price and colour filters and a grid of leather shoes', 1800, 1125),
+          shot('03-product.webp', 'Balanti product page for the Executive Cap-Toe with image gallery, colour, size and purchase options', 1800, 1125),
+        ],
+      },
     ],
   },
   {
@@ -77,7 +86,13 @@ export const balantiStory = [
       { t: 'p', x: 'This allowed the product experience and underlying data structure to be developed together.' },
       { t: 'p', x: 'The basic architecture can be understood as:' },
       { t: 'chain', x: ['Customer Interface', 'Vue.js Frontend', 'Django Backend', 'Product & Commerce Data'] },
-      { t: 'figure', placeholder: 'working storefront' },
+      {
+        t: 'figure',
+        images: [
+          shot('04-mobile-home.webp', 'Balanti home page on mobile with the Crafted for hero', 780, 1688, 'half'),
+          shot('05-mobile-product.webp', 'Balanti product page on mobile with gallery and product details', 780, 1688, 'half'),
+        ],
+      },
     ],
   },
   {

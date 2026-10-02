@@ -33,7 +33,7 @@ const img = (slug, file, alt, w, h, span = 'full') => ({ src: `/work/${slug}/${f
 export const projects = [
   {
     slug: 'quickcv',
-    cat: 'design-build',
+    cat: 'design',
     name: 'QuickCV',
     headline: 'Making job applications faster with AI.',
     description:
@@ -87,7 +87,7 @@ export const projects = [
   },
   {
     slug: 'reportmate',
-    cat: 'design-build',
+    cat: 'design',
     name: 'ReportMate',
     headline: 'Turning field reports into structured data.',
     description: 'A product concept exploring how OCR and AI-assisted workflows can reduce repetitive manual data processing.',
@@ -126,6 +126,8 @@ export const projects = [
     platform: 'E-commerce MVP',
     stack: 'Vue.js · Python/Django · Claude Code',
     location: 'Australia',
+    url: 'https://balanti.com.au/',
+    cover: img('balanti', '01-home.webp', 'Balanti home page with Formal wear, Boot and Casual wear collections and new arrivals', 1800, 1125),
   },
   {
     slug: 'design-system-bootstrapper',
@@ -163,7 +165,7 @@ export const projects = [
   },
   {
     slug: 'afsha-hossain',
-    cat: 'build',
+    cat: 'design-build',
     name: 'Afsha Hossain',
     headline: "Turning an author's identity into a digital experience.",
     description: "A personal website that brings an author's writing, books, stories, and creative identity together in one focused digital experience.",
@@ -188,7 +190,7 @@ export const projects = [
   },
   {
     slug: 'hikmah',
-    cat: 'build',
+    cat: 'design-build',
     name: 'Hikmah',
     headline: null,
     description: null,
