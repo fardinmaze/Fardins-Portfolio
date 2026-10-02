@@ -89,6 +89,15 @@ Verified: handler (405, bad body, validation, honeypot, 503 without key, success
 - QuickCV was left as the full 18-section page. It can be trimmed to a compact set on request (suggested: Problem, Product, Product Idea, My Role, AI as an Assistant, Results, Reflection).
 - Verified in Edge (static build): sections, tags, meta, titles, mobile no overflow, cards, zero console errors.
 
+### Update (same day): newer projects found in the Google Doc
+- The doc had been edited since the first read (modified later the same day). Re-read it in full. QuickCV, Go for Change and NeduAI are unchanged in substance. **New: Balanti and Afsha Hossain**, plus a "Next project" pointer to **Fair Urban Transitions in Khulna** (headline only, no write-up, so not added yet).
+- **Balanti** (DESIGN & BUILD, e-commerce MVP, Australia; Vue.js, Python/Django, Claude Code): 7 short sections (Challenge, Shopping Journey, My Role, From Interface to Working MVP, AI-Assisted Development, Outcome, What I Learned). Extra meta rows added: Location, Stack. `src/data/stories/balanti.js`.
+- **Afsha Hossain** (BUILD, author website, Australia, MVP): 5 short sections (Idea, Challenge, What I Built, From Concept to a Working Website, Outcome). `src/data/stories/afshahossain.js`.
+- Both are condensed (selected, not rewritten); what was left out is listed at the top of each file. Card blurbs: Balanti uses the doc's sentence verbatim; Afsha's is a light paraphrase of the doc's sentence ("her" changed to "an author's").
+- Placement: Balanti added to the home card stack (now 4 cards: QuickCV, Balanti, Go for Change, ReportMate); Afsha Hossain added first in Experiments (Afsha, Design System Bootstrapper, Hikmah). `/work` filters are now 3 Design, 3 Build, 3 Design & Build (9 total).
+- No screenshots for either yet (hero placeholder plus one or two inline placeholders each).
+- Verified in Edge (static build): both pages, meta rows, filters, 4-card stack ends at 04/04, Experiments rows, mobile no overflow, zero console errors.
+
 ### Design system (superseded by the revert above)
 Palette and font switched to the system specified in the brief: bg `#080C0E`, surface `#10171A` / `#172125`, primary `#4F7A8A`, hover `#638F9F`, accent `#22D3EE`, text `#F4F7F8`, body `#D3DCE0`, muted `#8A989E`, border `#263237`, font Geist (Inter fallback).
 - **Note:** the previous iteration used lime on near-black. The brief said "keep the existing system" but listed these teal/cyan values, so the listed values were applied. Say if you actually wanted lime kept.

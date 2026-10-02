@@ -18,6 +18,8 @@
 import { quickcvIntro, quickcvStory } from './stories/quickcv'
 import { goforchangeIntro, goforchangeStory } from './stories/goforchange'
 import { neduaiIntro, neduaiStory } from './stories/neduai'
+import { balantiIntro, balantiStory } from './stories/balanti'
+import { afshaIntro, afshaStory } from './stories/afshahossain'
 
 export const CATEGORIES = {
   design: { key: 'design', label: 'Design' },
@@ -110,6 +112,22 @@ export const projects = [
     process: ['Problem identification & research', 'User flow mapping', 'Wireframing & prototyping', 'UI design', 'OCR integration planning', 'Usability testing', 'Final design & developer handoff'],
   },
   {
+    slug: 'balanti',
+    cat: 'design-build',
+    name: 'Balanti',
+    headline: 'Turning a retail brand into a digital shopping experience.',
+    description: "The project involved designing and building an e-commerce MVP that translates the brand's physical retail experience into a focused digital storefront.",
+    intro: balantiIntro,
+    story: balantiStory,
+    role: 'Product Design · UX/UI · Frontend Development · Backend Development · AI-Assisted Development',
+    tags: ['Product Design', 'UX/UI', 'Vue.js', 'Django'],
+    pageTags: ['Product Design', 'UX/UI', 'Frontend Development', 'Backend Development', 'AI-Assisted Development'],
+    year: null,
+    platform: 'E-commerce MVP',
+    stack: 'Vue.js · Python/Django · Claude Code',
+    location: 'Australia',
+  },
+  {
     slug: 'design-system-bootstrapper',
     cat: 'build',
     name: 'Design System Bootstrapper',
@@ -144,6 +162,20 @@ export const projects = [
     platform: 'Career & education technology · Europe',
   },
   {
+    slug: 'afsha-hossain',
+    cat: 'build',
+    name: 'Afsha Hossain',
+    headline: "Turning an author's identity into a digital experience.",
+    description: "A personal website that brings an author's writing, books, stories, and creative identity together in one focused digital experience.",
+    intro: afshaIntro,
+    story: afshaStory,
+    role: 'Product Concept · Web Design · AI-Assisted Development',
+    tags: ['Product Concept', 'Web Design', 'AI-Assisted Development'],
+    year: null,
+    platform: 'Author website · MVP',
+    location: 'Australia',
+  },
+  {
     slug: 'portulika',
     cat: 'design',
     name: 'Portulika',
@@ -167,8 +199,8 @@ export const projects = [
   },
 ]
 
-export const featuredSlugs = ['quickcv', 'go-for-change', 'reportmate']
-export const experimentSlugs = ['design-system-bootstrapper', 'hikmah']
+export const featuredSlugs = ['quickcv', 'balanti', 'go-for-change', 'reportmate']
+export const experimentSlugs = ['afsha-hossain', 'design-system-bootstrapper', 'hikmah']
 export const additionalSlugs = ['nedu-ai', 'portulika']
 
 // Earlier work from the previous Framer portfolio. Listed, no dedicated page.

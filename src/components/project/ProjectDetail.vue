@@ -46,6 +46,8 @@ const images = computed(() => props.project.images || [])
           <div v-if="project.year"><dt class="label muted">Year</dt><dd>{{ project.year }}</dd></div>
           <div v-if="project.platform"><dt class="label muted">Platform</dt><dd>{{ project.platform }}</dd></div>
           <div v-if="project.company"><dt class="label muted">Company</dt><dd>{{ project.company }}</dd></div>
+          <div v-if="project.location"><dt class="label muted">Location</dt><dd>{{ project.location }}</dd></div>
+          <div v-if="project.stack"><dt class="label muted">Stack</dt><dd>{{ project.stack }}</dd></div>
         </dl>
 
         <div v-if="!project.story && tabs.length" class="tabs rise" style="--i: 3">
