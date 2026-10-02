@@ -1,9 +1,7 @@
 import { createApp } from 'vue'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import App from './App.vue'
+import { router } from './router'
+import { vReveal } from './composables/reveal'
 import './styles/base.css'
 
-gsap.registerPlugin(ScrollTrigger)
-
-createApp(App).mount('#app')
+createApp(App).use(router).directive('reveal', vReveal).mount('#app')

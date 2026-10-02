@@ -1,101 +1,90 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { gsap } from 'gsap'
-import { profile } from '../data/content'
-import { scrollToTarget } from '../composables/useSmoothScroll'
-import { vMagnetic } from '../composables/magnetic'
-
-const root = ref(null)
-const blobs = ref(null)
-let ctx
-let offMove
-
-onMounted(() => {
-  ctx = gsap.context(() => {
-    // Intro: headline lines rise out of a mask, then supporting content fades in.
-    const tl = gsap.timeline({ defaults: { ease: 'power4.out' } })
-    tl.from('.h-line > span', { yPercent: 115, rotate: 3, duration: 1.2, stagger: 0.12, delay: 0.2 })
-      .from('.h-fade', { y: 24, opacity: 0, duration: 0.9, stagger: 0.1 }, '-=0.7')
-      .from('.orb', { scale: 0.6, opacity: 0, duration: 1.6, stagger: 0.15 }, 0)
-
-    // Scroll: gradient field drifts slower than the page (parallax), headline fades/lifts.
-    gsap.to(blobs.value, {
-      yPercent: 25, scale: 1.15, ease: 'none',
-      scrollTrigger: { trigger: root.value, start: 'top top', end: 'bottom top', scrub: true },
-    })
-    gsap.to('.hero-inner', {
-      yPercent: -14, opacity: 0.1, ease: 'none',
-      scrollTrigger: { trigger: root.value, start: '30% top', end: 'bottom top', scrub: true },
-    })
-
-    // Pointer: orbs follow cursor at different depths.
-    const movers = gsap.utils.toArray('.orb').map((el, i) => ({
-      x: gsap.quickTo(el, 'x', { duration: 1.6, ease: 'power3' }),
-      y: gsap.quickTo(el, 'y', { duration: 1.6, ease: 'power3' }),
-      depth: (i + 1) * 28,
-    }))
-    const move = (e) => {
-      const nx = e.clientX / window.innerWidth - 0.5
-      const ny = e.clientY / window.innerHeight - 0.5
-      movers.forEach((m) => { m.x(nx * m.depth * 2); m.y(ny * m.depth * 2) })
-    }
-    window.addEventListener('mousemove', move)
-    offMove = () => window.removeEventListener('mousemove', move)
-  }, root.value)
-})
-onBeforeUnmount(() => { offMove?.(); ctx?.revert() })
+import { hero } from '../data/content'
 </script>
 
 <template>
-  <section id="top" ref="root" class="hero">
-    <div ref="blobs" class="field" aria-hidden="true">
-      <div class="orb o1" /><div class="orb o2" /><div class="orb o3" /><div class="orb o4" />
-      <div class="grain" />
-    </div>
+  <section id="top" class="hero" aria-labelledby="hero-title">
+    <div class="gridbg" aria-hidden="true" />
+    <div class="wrap inner">
+      <div class="meta rise" style="--i: 0">
+        <span class="label accent">{{ hero.metaLeft }}</span>
+        <span class="label muted">{{ hero.metaRight }}</span>
+      </div>
 
-    <div class="container hero-inner">
-      <p class="h-fade eyebrow">{{ profile.role }} · {{ profile.company }}</p>
-      <h1>
-        <span v-for="(l, i) in profile.headline" :key="i" class="line-mask h-line">
-          <span :class="{ 'grad-text': i === 2 }">{{ l }}</span>
-        </span>
+      <h1 id="hero-title">
+        <span class="line rise" style="--i: 1">Product Analyst</span>
+        <span class="line rise" style="--i: 2">&amp; Designer<span class="stop">.</span></span>
       </h1>
-      <div class="row">
-        <p class="h-fade intro">{{ profile.intro }}</p>
-        <div class="h-fade actions">
-          <a v-magnetic="0.3" :href="profile.calendly" target="_blank" rel="noopener" class="btn">Talk with me <span class="arrow">→</span></a>
-          <a v-magnetic="0.3" href="#work" class="btn ghost" @click.prevent="scrollToTarget('#work')">View work</a>
+
+      <div class="lower grid">
+        <div class="copy">
+          <p class="lead rise" style="--i: 3">{{ hero.lead }}</p>
+          <p class="sub rise" style="--i: 3">{{ hero.sub }}</p>
+          <div class="ctas rise" style="--i: 4">
+            <RouterLink to="/work" class="btn btn-accent">View work <span class="arr">↘</span></RouterLink>
+            <RouterLink :to="{ path: '/', hash: '#contact' }" class="btn btn-ghost">Let's talk <span class="arr">↗</span></RouterLink>
+          </div>
         </div>
+
+        <!-- Product-development system: one lime marker steps through the stages (CSS only) -->
+        <ol class="pipe rise" style="--i: 5" role="img" aria-label="Product development flow: idea, research, product, design, build, launch">
+          <li v-for="(s, i) in hero.pipeline" :key="s.name" class="step" :style="{ '--n': i }" aria-hidden="true">
+            <span class="idx num">0{{ i + 1 }}</span>
+            <span class="name">{{ s.name }}</span>
+            <span class="note">{{ s.note }}</span>
+          </li>
+        </ol>
       </div>
     </div>
-
-    <div class="h-fade scroll-hint">Scroll <span /></div>
   </section>
 </template>
 
 <style scoped>
-.hero { min-height: 100svh; display: flex; align-items: center; padding: 140px 0 100px; overflow: hidden; }
-.field { position: absolute; inset: -10%; z-index: 0; filter: blur(70px) saturate(1.2); }
-.orb { position: absolute; border-radius: 50%; will-change: transform; }
-.o1 { width: 46vw; height: 46vw; left: 4%; top: 8%; background: var(--purple); opacity: .55; animation: float1 16s ease-in-out infinite alternate; }
-.o2 { width: 38vw; height: 38vw; right: 2%; top: 16%; background: var(--pink); opacity: .5; animation: float2 19s ease-in-out infinite alternate; }
-.o3 { width: 32vw; height: 32vw; left: 38%; bottom: 0; background: var(--red); opacity: .42; animation: float3 22s ease-in-out infinite alternate; }
-.o4 { width: 26vw; height: 26vw; left: 22%; top: 40%; background: #4d6bff; opacity: .28; animation: float2 25s ease-in-out infinite alternate-reverse; }
-@keyframes float1 { to { transform: translate(14vw, 10vh) scale(1.2); } }
-@keyframes float2 { to { transform: translate(-16vw, 14vh) scale(0.85); } }
-@keyframes float3 { to { transform: translate(-12vw, -16vh) scale(1.25); } }
-.grain {
-  position: absolute; inset: 0; opacity: .18; mix-blend-mode: overlay; filter: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+.hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; padding: calc(var(--nav-h) + 56px) 0 56px; overflow: hidden; }
+.gridbg {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0.55;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 70% 40%, #000 0%, transparent 75%);
+  mask-image: radial-gradient(ellipse 80% 70% at 70% 40%, #000 0%, transparent 75%);
 }
-.hero::after { content: ''; position: absolute; inset: 0; z-index: 0; background: radial-gradient(ellipse at 50% 55%, rgba(236,235,231,.55), rgba(236,235,231,.1) 70%); pointer-events: none; }
+.inner { position: relative; width: 100%; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px 32px; margin-bottom: clamp(28px, 4vw, 56px); }
+h1 { font-size: var(--h-hero); line-height: 0.94; letter-spacing: -0.045em; text-transform: uppercase; font-weight: 800; margin-bottom: clamp(40px, 6vw, 88px); }
+.line { display: block; }
+.stop { color: var(--accent); }
 
-.hero-inner { position: relative; z-index: 1; width: 100%; }
-h1 { font-size: clamp(44px, 9.2vw, 148px); margin: 28px 0 44px; }
-.row { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; }
-.intro { max-width: 460px; font-size: clamp(16px, 1.4vw, 20px); color: #2b2b2e; }
-.actions { display: flex; gap: 12px; flex-wrap: wrap; }
-.scroll-hint { position: absolute; z-index: 1; bottom: 28px; left: var(--gutter); display: flex; align-items: center; gap: 12px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
-.scroll-hint span { width: 1px; height: 36px; background: linear-gradient(var(--ink), transparent); animation: drip 1.8s ease-in-out infinite; transform-origin: top; }
-@keyframes drip { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
+.lower { align-items: end; row-gap: 40px; }
+.copy { grid-column: 1 / span 6; }
+.lead { font-size: clamp(1.35rem, 2.2vw, 1.85rem); line-height: 1.2; letter-spacing: -0.02em; font-weight: 600; max-width: 22em; }
+.sub { margin-top: 16px; color: var(--muted); max-width: 30em; }
+.ctas { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+.pipe { grid-column: 8 / span 5; border-top: 1px solid var(--line); }
+.step {
+  position: relative; display: grid; grid-template-columns: 34px 1fr auto; align-items: baseline; gap: 12px;
+  padding: 11px 0 11px 22px; border-bottom: 1px solid var(--line); color: var(--muted);
+  animation: lit 7.2s linear infinite; animation-delay: calc(var(--n) * 1.2s);
+}
+.step::before {
+  content: ''; position: absolute; left: 0; top: 50%; width: 8px; height: 8px; translate: 0 -50%;
+  border: 1px solid var(--primary); background: var(--bg); animation: node 7.2s linear infinite; animation-delay: calc(var(--n) * 1.2s);
+}
+.idx { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; }
+.name { font-size: 1.25rem; font-weight: 700; letter-spacing: -0.02em; text-transform: uppercase; }
+.note { font-size: 12px; letter-spacing: 0.04em; text-transform: uppercase; font-weight: 500; }
+@keyframes lit { 0%, 14% { color: var(--text); } 17%, 100% { color: var(--muted); } }
+@keyframes node { 0%, 14% { background: var(--accent); border-color: var(--accent); } 17%, 100% { background: var(--bg); border-color: var(--primary); } }
+
+@media (max-width: 1099px) {
+  .copy { grid-column: 1 / -1; }
+  .pipe { grid-column: 1 / -1; }
+}
+@media (max-width: 599px) {
+  .note { display: none; }
+  .step { grid-template-columns: 34px 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .step, .step::before { animation: none; }
+}
 </style>

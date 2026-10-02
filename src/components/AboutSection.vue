@@ -1,50 +1,39 @@
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import { gsap } from 'gsap'
-import { profile, stats } from '../data/content'
-
-const root = ref(null)
-const words = computed(() => profile.about.split(' '))
-let ctx
-
-onMounted(() => {
-  ctx = gsap.context(() => {
-    // Scroll-scrubbed reading highlight: each word lights up as you read.
-    gsap.fromTo('.w', { opacity: 0.14 }, {
-      opacity: 1, stagger: 0.1, ease: 'none',
-      scrollTrigger: { trigger: '.statement', start: 'top 78%', end: 'bottom 45%', scrub: true },
-    })
-
-    // Count-up numbers fire once when the row enters.
-    gsap.utils.toArray('.num').forEach((el) => {
-      const target = Number(el.dataset.value)
-      const o = { v: 0 }
-      gsap.to(o, {
-        v: target, duration: 1.8, ease: 'power2.out',
-        scrollTrigger: { trigger: el, start: 'top 90%', once: true },
-        onUpdate: () => { el.textContent = Math.round(o.v) },
-      })
-    })
-    gsap.from('.stat', {
-      y: 40, opacity: 0, stagger: 0.1, duration: 0.8, ease: 'power3.out',
-      scrollTrigger: { trigger: '.stats', start: 'top 88%' },
-    })
-  }, root.value)
-})
-onBeforeUnmount(() => ctx?.revert())
+import { about } from '../data/content'
 </script>
 
 <template>
-  <section id="about" ref="root" class="about">
-    <div class="container">
-      <span class="eyebrow">About</span>
-      <p class="statement">
-        <span v-for="(w, i) in words" :key="i" class="w">{{ w }}</span>
-      </p>
-      <div class="stats">
-        <div v-for="s in stats" :key="s.label" class="stat">
-          <div class="big"><span class="num" :data-value="s.value">0</span>{{ s.suffix }}</div>
-          <div class="lbl">{{ s.label }}</div>
+  <section id="about" class="section rule" aria-labelledby="about-title">
+    <div class="wrap grid">
+      <div class="left">
+        <p class="label accent" v-reveal>About</p>
+        <h2 id="about-title" class="h-section title" v-reveal="1">
+          <span v-for="l in about.title" :key="l" class="tl">{{ l }}</span>
+        </h2>
+        <div class="paras">
+          <p v-for="(p, i) in about.paragraphs" :key="i" v-reveal="i + 2">{{ p }}</p>
+        </div>
+        <ul class="tags" v-reveal="4">
+          <li v-for="t in about.tags" :key="t" class="label">{{ t }}</li>
+        </ul>
+      </div>
+
+      <div class="right">
+        <dl class="facts" v-reveal="2">
+          <div v-for="f in about.facts" :key="f.big">
+            <dt>{{ f.big }}</dt>
+            <dd class="label muted">{{ f.small }}</dd>
+          </div>
+        </dl>
+
+        <div class="exp" v-reveal="3">
+          <p class="label muted head">Experience</p>
+          <ul>
+            <li v-for="e in about.experience" :key="e.org + e.role">
+              <span class="role">{{ e.role }}<span class="muted"> · {{ e.org }}</span></span>
+              <span class="label muted period">{{ e.period }}</span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -52,16 +41,28 @@ onBeforeUnmount(() => ctx?.revert())
 </template>
 
 <style scoped>
-.about { padding: clamp(100px, 16vw, 220px) 0 clamp(80px, 10vw, 140px); }
-.statement { margin: 32px 0 clamp(60px, 8vw, 110px); max-width: 1100px; font-family: var(--font-display); font-weight: 500; font-size: clamp(28px, 4.4vw, 64px); line-height: 1.12; letter-spacing: -0.03em; }
-.w { display: inline-block; margin-right: 0.26em; }
-.stats { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid var(--line); }
-.stat { padding: 28px 24px 0 0; }
-.stat + .stat { padding-left: 24px; border-left: 1px solid var(--line); }
-.big { font-family: var(--font-display); font-size: clamp(40px, 6vw, 88px); font-weight: 600; letter-spacing: -0.04em; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; line-height: 1; }
-.lbl { margin-top: 10px; color: var(--muted); font-size: 14px; }
-@media (max-width: 720px) {
-  .stats { grid-template-columns: 1fr 1fr; row-gap: 32px; }
-  .stat:nth-child(3) { border-left: 0; padding-left: 0; }
+.left { grid-column: 1 / span 7; }
+.right { grid-column: 9 / span 4; padding-top: 2.4rem; }
+.title { margin: 20px 0 clamp(28px, 4vw, 48px); font-size: clamp(2.5rem, 6vw, 4.8rem); }
+.tl { display: block; }
+.paras { display: flex; flex-direction: column; gap: 20px; max-width: 32em; font-size: clamp(1.1rem, 1.6vw, 1.3rem); line-height: 1.45; }
+.paras p:first-child { color: var(--text); }
+.paras p + p { color: var(--muted); }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 36px; }
+.tags li { padding: 8px 12px; border: 1px solid var(--line); border-radius: 4px; }
+
+.facts > div { padding: 20px 0; border-top: 1px solid var(--line); }
+.facts dt { font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 800; letter-spacing: -0.04em; text-transform: uppercase; line-height: 1; margin-bottom: 8px; }
+.exp { margin-top: 28px; border-top: 1px solid var(--line); padding-top: 20px; }
+.head { margin-bottom: 8px; }
+.exp li { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-bottom: 1px solid var(--line); font-size: 1rem; line-height: 1.3; }
+.period { white-space: nowrap; padding-top: 3px; }
+
+@media (max-width: 999px) {
+  .left, .right { grid-column: 1 / -1; }
+  .right { padding-top: 56px; }
+}
+@media (max-width: 519px) {
+  .exp li { flex-direction: column; gap: 4px; }
 }
 </style>
