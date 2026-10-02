@@ -7,11 +7,11 @@ import { about } from '../data/content'
     <div class="wrap grid">
       <div class="left">
         <p class="label accent" v-reveal>About</p>
-        <h2 id="about-title" class="h-section title" v-reveal="1">
+        <h2 id="about-title" class="h-section title" v-split="'lines'">
           <span v-for="l in about.title" :key="l" class="tl">{{ l }}</span>
         </h2>
         <div class="paras">
-          <p v-for="(p, i) in about.paragraphs" :key="i" v-reveal="i + 2">{{ p }}</p>
+          <p v-for="(p, i) in about.paragraphs" :key="i" v-split="'blur-words'">{{ p }}</p>
         </div>
         <ul class="tags" v-reveal="4">
           <li v-for="t in about.tags" :key="t" class="label">{{ t }}</li>

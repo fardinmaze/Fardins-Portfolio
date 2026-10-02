@@ -66,7 +66,7 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .nav { position: fixed; inset: 0 0 auto 0; z-index: 100; border-bottom: 1px solid transparent; transition: background-color 0.3s, border-color 0.3s; }
-.nav.scrolled, .nav.open { background: rgba(8, 12, 14, 0.92); border-bottom-color: var(--line); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.nav.scrolled, .nav.open { background: rgba(10, 10, 10, 0.9); border-bottom-color: var(--line); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
 .bar { height: var(--nav-h); display: flex; align-items: center; gap: 40px; }
 .brand { font-weight: 800; font-size: 18px; letter-spacing: -0.02em; margin-right: auto; color: var(--text); }
 .links { display: flex; gap: 32px; }

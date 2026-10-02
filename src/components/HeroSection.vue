@@ -11,9 +11,9 @@ import { hero } from '../data/content'
         <span class="label muted">{{ hero.metaRight }}</span>
       </div>
 
-      <h1 id="hero-title">
-        <span class="line rise" style="--i: 1">Product Analyst</span>
-        <span class="line rise" style="--i: 2">&amp; Designer<span class="stop">.</span></span>
+      <h1 id="hero-title" v-split="{ effect: 'tilt-lines', trigger: 'load' }">
+        <span class="line">Product Analyst</span>
+        <span class="line">&amp; Designer<span class="stop">.</span></span>
       </h1>
 
       <div class="lower grid">

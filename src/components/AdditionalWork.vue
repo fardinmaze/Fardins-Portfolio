@@ -9,7 +9,7 @@ const items = pick(additionalSlugs)
   <section id="additional" class="section rule" aria-labelledby="add-title">
     <div class="wrap">
       <p class="label accent" v-reveal>Additional work</p>
-      <h2 id="add-title" class="h-section title" v-reveal="1">More projects.</h2>
+      <h2 id="add-title" class="h-section title" v-split="'lines'">More projects.</h2>
 
       <div class="list" v-reveal="1">
         <ProjectRow v-for="(p, i) in items" :key="p.slug" :project="p" :n="`0${i + 1}`" />

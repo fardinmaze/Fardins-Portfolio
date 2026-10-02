@@ -7,7 +7,7 @@ import CategoryTag from './CategoryTag.vue'
   <section id="positioning" class="section" aria-labelledby="pos-title">
     <div class="wrap">
       <p class="label accent" v-reveal>How I work on projects</p>
-      <h2 id="pos-title" class="h-section title" v-reveal="1">
+      <h2 id="pos-title" class="h-section title" v-split="'lines'">
         <span v-for="l in p.title" :key="l" class="tl">{{ l }}</span>
       </h2>
 

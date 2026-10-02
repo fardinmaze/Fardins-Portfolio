@@ -1,16 +1,16 @@
 :root {
-  --bg: #080c0e;
-  --surface: #10171a;
-  --surface-2: #172125;
-  --primary: #4f7a8a;        /* lines, markers, DESIGN signal (decorative) */
-  --primary-hover: #638f9f;  /* teal for text + filled buttons (passes AA on --bg) */
-  --accent: #22d3ee;         /* cyan: BUILD signal and small indicators only */
-  --text: #f4f7f8;
-  --body: #d3dce0;
-  --muted: #8a989e;
-  --line: #263237;
+  --bg: #0a0a0a;
+  --surface: #101010;
+  --surface-2: #171717;
+  --primary: #4a4a46;        /* neutral: lines, markers */
+  --primary-hover: #c8ff3d;  /* the single lime accent: labels, CTAs, hovers */
+  --accent: #c8ff3d;         /* lime accent */
+  --text: #f5f5f0;
+  --body: #f5f5f0;
+  --muted: #9a9a93;
+  --line: #242424;
   --r: 6px;
-  --font: 'Geist', 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font: 'Inter Tight', 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
   --gutter: clamp(20px, 4.5vw, 64px);
   --nav-h: 68px;
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
@@ -30,6 +30,12 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
 ul, ol { list-style: none; }
 h1, h2, h3 { color: var(--text); font-weight: 700; line-height: 1; letter-spacing: -0.04em; }
+/* intro: page is held (no scroll, hero paused) until the loader releases it */
+html[data-loading] { overflow: hidden; }
+html[data-loading] .rise { animation-play-state: paused; }
+/* split text stays hidden until SplitText has measured it, so lines never flash unsplit */
+[data-split]:not([data-split-ready]) { visibility: hidden; }
+.sl-mask { padding-block: 0.1em; margin-block: -0.1em; }
 section[id] { scroll-margin-top: calc(var(--nav-h) - 1px); }
 ::selection { background: var(--primary-hover); color: var(--bg); }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
@@ -84,6 +90,7 @@ section[id] { scroll-margin-top: calc(var(--nav-h) - 1px); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  [data-split] { visibility: visible !important; }
   .rise { animation: none; opacity: 1; }
   .reveal { opacity: 1; transform: none; transition: none; }
   .btn, .btn .arr, .link-arrow .arr { transition: none; }
@@ -94,7 +101,8 @@ section[id] { scroll-margin-top: calc(var(--nav-h) - 1px); }
 /* category signals: DESIGN = teal, BUILD = cyan, DESIGN & BUILD = both, kept small */
 .ctag { display: inline-flex; align-items: center; gap: 8px; }
 .ctag i { width: 8px; height: 8px; display: inline-block; }
-.ctag .d-design { background: var(--primary); }
+/* one accent colour, so categories are told apart by marker shape: outline = DESIGN, solid = BUILD, both = DESIGN & BUILD */
+.ctag .d-design { border: 1.5px solid var(--accent); }
 .ctag .d-build { background: var(--accent); }
 .ctag.c-design { color: var(--primary-hover); }
 .ctag.c-build { color: var(--accent); }

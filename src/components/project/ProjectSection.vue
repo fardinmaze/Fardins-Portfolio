@@ -30,7 +30,7 @@ const asset = (i) => supplied.value[i] || {}
     <div class="wrap">
       <header class="sh grid">
         <p class="num label accent idx">{{ n }}</p>
-        <h2 :id="`h-${def.key}`" class="title">{{ def.title }}</h2>
+        <h2 :id="`h-${def.key}`" class="title" v-split="'lines'">{{ def.title }}</h2>
       </header>
 
       <!-- text -->

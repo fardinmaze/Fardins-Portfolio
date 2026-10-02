@@ -8,10 +8,10 @@ import { ai } from '../data/content'
       <div class="grid">
         <div class="left">
           <p class="label accent" v-reveal>AI-assisted workflow</p>
-          <h2 id="ai-title" class="h-section title" v-reveal="1">
+          <h2 id="ai-title" class="h-section title" v-split="'lines'">
             <span v-for="l in ai.title" :key="l" class="tl">{{ l }}</span>
           </h2>
-          <p class="text" v-reveal="2">{{ ai.text }}</p>
+          <p class="text" v-split="'fade-lines'">{{ ai.text }}</p>
         </div>
 
         <ol class="seq" v-reveal="2" aria-label="Workflow sequence">

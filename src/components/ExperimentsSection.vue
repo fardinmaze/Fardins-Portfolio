@@ -11,9 +11,9 @@ const items = pick(experimentSlugs)
       <div class="grid head">
         <div class="l">
           <p class="label accent" v-reveal>Micro products / experiments</p>
-          <h2 id="exp-title" class="h-section title" v-reveal="1">Small tools,<br />working proof.</h2>
+          <h2 id="exp-title" class="h-section title" v-split="'lines'">Small tools,<br />working proof.</h2>
         </div>
-        <p class="r" v-reveal="2">Experiments where the goal is a working thing, not a mockup: tools and MVPs built to test an idea fast.</p>
+        <p class="r" v-split="'fade-lines'">Experiments where the goal is a working thing, not a mockup: tools and MVPs built to test an idea fast.</p>
       </div>
       <div class="list" v-reveal="1">
         <ProjectRow v-for="(p, i) in items" :key="p.slug" :project="p" :n="`0${i + 1}`" />

@@ -22,7 +22,21 @@ Source of content: https://fardinpronoy.framer.website/
 - **Category signal:** DESIGN = teal square, BUILD = cyan square, DESIGN & BUILD = both. Used only on tags, the hero crumb, the positioning cards and the spine; everything else is one neutral system.
 - Per-route title, description, og tags and canonical set in `src/router/index.js`.
 
-### Design system
+### Update (same day): palette reverted, dev-server fix
+- **Palette reverted to the Iteration 2 lime system** at the owner's request: bg `#0A0A0A`, text `#F5F5F0`, muted `#9A9A93`, line `#242424`, single accent lime `#C8FF3D`, font Inter Tight. Teal/cyan are gone; the tokens in `src/styles/base.css` are the only place colour lives.
+- With one accent colour, categories are told apart by marker shape instead: outline square = DESIGN, solid square = BUILD, both = DESIGN & BUILD.
+- **Blank page on localhost:** the dev server had been running since before `vue-router` was installed, so Vite's dependency cache was stale and `<RouterView>` rendered nothing (no console error; production build was fine). Fix: stop the server, `rm -rf node_modules/.vite`, `npm run dev -- --force`. If it ever happens again after adding a dependency, restart the dev server.
+
+### Update (same day): Klyne-style loader, stacked work cards, split-text reveals
+Reference studied: klyne.design (their public client scripts were read to understand the behaviour; the implementation here is original).
+- **GSAP is back** (`gsap` 3.15 incl. ScrollTrigger + SplitText, no Lenis). Reason: a timeline loader, a scrubbed pinned stack and SplitText are what it is for. Cost: JS ~42 kB to ~92 kB gzip.
+- **Loader** (`SiteLoader.vue`, `composables/loader.js`): wordmark `FARDIN.` letters rise with a stagger, holds until fonts are ready, letters exit, then the screen splits into two halves that slide apart (one up, one down, `expo.inOut`, 0.9s). The hero is released halfway through the curtain (`html[data-loading]` pauses hero animation and scroll until then). Skipped entirely with `prefers-reduced-motion`; hard fallbacks at 2.5s (fonts), 9s (loader) and 10s (inline script in `index.html`) so the page can never stay locked.
+- **Selected work = pinned card stack** (`WorkSection.vue`): the 3 featured projects sit in a sticky stage. Scrolling flies the top card up while it tilts (a different angle per card), the rest step forward in depth (y/z offsets). The stack also swings in on entry with images scaling 1.35 to 1, and a `01 / 03` counter tracks progress. Smaller depth offsets under 768px. Reduced motion shows a plain readable list. `ProjectFeature.vue` was removed.
+- **Text scroll animation** (`composables/split.js`, directive `v-split`): SplitText effects `lines`, `words`, `chars`, `tilt-lines` (masked) and `fade-lines`, `fade-words`, `blur-words`, `blur-chars`; plays once when the text reaches 85% of the viewport, or on load for the hero (after the loader). Currently: hero `tilt-lines`, section titles `lines`, About paragraphs `blur-words`, lead paragraphs `fade-lines`, contact title `tilt-lines`. Re-splits on resize and font load without replaying.
+- Verified in Edge: loader sequence frames, hero release, stack scroll states 01/02/03, split text ready, mobile (390px) with no horizontal overflow, reduced-motion path, dev server, zero console errors.
+- Not exercised: real touch scrolling and low-end device performance.
+
+### Design system (superseded by the revert above)
 Palette and font switched to the system specified in the brief: bg `#080C0E`, surface `#10171A` / `#172125`, primary `#4F7A8A`, hover `#638F9F`, accent `#22D3EE`, text `#F4F7F8`, body `#D3DCE0`, muted `#8A989E`, border `#263237`, font Geist (Inter fallback).
 - **Note:** the previous iteration used lime on near-black. The brief said "keep the existing system" but listed these teal/cyan values, so the listed values were applied. Say if you actually wanted lime kept.
 - Contrast: `#4F7A8A` on bg is ~4.2:1, which fails AA for small text. So `#4F7A8A` is used only for lines/markers; teal text and the filled button use `#638F9F` (~5.6:1).

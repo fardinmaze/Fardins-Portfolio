@@ -6,7 +6,7 @@ import { profile } from '../data/content'
   <section id="contact" class="section rule cta" aria-labelledby="contact-title">
     <div class="wrap">
       <p class="label accent" v-reveal>Have an idea?</p>
-      <h2 id="contact-title" class="title" v-reveal="1">
+      <h2 id="contact-title" class="title" v-split="'tilt-lines'">
         <span class="tl">Let's build</span>
         <span class="tl">something useful.</span>
       </h2>

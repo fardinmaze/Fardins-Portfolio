@@ -51,7 +51,7 @@ const heroImg = computed(() => props.project.hero || null)
 .crumb { display: flex; align-items: center; gap: 12px; color: var(--muted); margin-bottom: 20px; }
 .sig { display: inline-flex; gap: 4px; }
 .sig i { width: 8px; height: 8px; display: block; }
-.d-design { background: var(--primary); }
+.d-design { border: 1.5px solid var(--accent); }
 .d-build { background: var(--accent); }
 .cat { color: var(--text); }
 .c-design .cat { color: var(--primary-hover); }
