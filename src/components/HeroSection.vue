@@ -22,7 +22,7 @@ import { hero } from '../data/content'
           <p class="sub rise" style="--i: 3">{{ hero.sub }}</p>
           <div class="ctas rise" style="--i: 4">
             <RouterLink to="/work" class="btn btn-accent">View work <span class="arr">↘</span></RouterLink>
-            <RouterLink :to="{ path: '/', hash: '#contact' }" class="btn btn-ghost">Let's talk <span class="arr">↗</span></RouterLink>
+            <RouterLink to="/contact" class="btn btn-ghost">Let's talk <span class="arr">↗</span></RouterLink>
           </div>
         </div>
 

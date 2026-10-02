@@ -7,7 +7,6 @@ export const profile = {
   role: 'Product Analyst & Designer',
   email: 'mazumder.mdfardin@gmail.com',
   calendly: 'https://calendly.com/mazumderfardin/15min',
-  framer: 'https://fardinpronoy.framer.website/',
   linkedin: 'https://www.linkedin.com/', // TODO: replace with the exact profile URL
 }
 
@@ -15,7 +14,7 @@ export const nav = [
   { label: 'Work', to: '/work', id: 'work' },
   { label: 'About', to: { path: '/', hash: '#about' }, id: 'about' },
   { label: 'Experiments', to: { path: '/', hash: '#experiments' }, id: 'experiments' },
-  { label: 'Contact', to: { path: '/', hash: '#contact' }, id: 'contact' },
+  { label: 'Contact', to: '/contact', id: 'contact' },
 ]
 
 export const hero = {

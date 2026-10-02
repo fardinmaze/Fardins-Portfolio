@@ -12,7 +12,7 @@ import { profile } from '../data/content'
       </h2>
 
       <div class="row" v-reveal="2">
-        <a :href="`mailto:${profile.email}`" class="btn btn-accent big" data-cursor="OPEN">Start a conversation <span class="arr">↗</span></a>
+        <RouterLink to="/contact" class="btn btn-accent big" data-cursor="OPEN">Start a conversation <span class="arr">↗</span></RouterLink>
         <dl class="info">
           <div>
             <dt class="label muted">Email</dt>

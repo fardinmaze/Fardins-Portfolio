@@ -25,7 +25,10 @@ function observe() {
   document.querySelectorAll('section[id]').forEach((s) => io.observe(s))
 }
 
-const isActive = (id) => (id === 'work' && route.path.startsWith('/work')) || (route.name === 'home' && hashActive.value === id)
+const isActive = (id) =>
+  (id === 'work' && route.path.startsWith('/work')) ||
+  (id === 'contact' && route.path === '/contact') ||
+  (route.name === 'home' && id !== 'contact' && hashActive.value === id)
 
 onMounted(() => {
   onScroll()
@@ -50,7 +53,7 @@ onBeforeUnmount(() => {
         <RouterLink v-for="n in nav" :key="n.id" :to="n.to" class="link label" :aria-current="isActive(n.id) ? 'true' : undefined">{{ n.label }}</RouterLink>
       </nav>
 
-      <RouterLink :to="{ path: '/', hash: '#contact' }" class="btn btn-accent cta">Let's talk <span class="arr">↗</span></RouterLink>
+      <RouterLink to="/contact" class="btn btn-accent cta">Let's talk <span class="arr">↗</span></RouterLink>
 
       <button class="menu label" :aria-expanded="open" aria-controls="mobile-menu" @click="open = !open">
         {{ open ? 'Close' : 'Menu' }}
@@ -59,7 +62,7 @@ onBeforeUnmount(() => {
 
     <nav id="mobile-menu" class="panel" aria-label="Mobile" :hidden="!open">
       <RouterLink v-for="n in nav" :key="n.id" :to="n.to">{{ n.label }}</RouterLink>
-      <RouterLink :to="{ path: '/', hash: '#contact' }" class="accent">Let's talk ↗</RouterLink>
+      <RouterLink to="/contact" class="accent">Let's talk ↗</RouterLink>
     </nav>
   </header>
 </template>

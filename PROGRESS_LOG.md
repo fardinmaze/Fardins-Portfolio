@@ -36,6 +36,21 @@ Reference studied: klyne.design (their public client scripts were read to unders
 - Verified in Edge: loader sequence frames, hero release, stack scroll states 01/02/03, split text ready, mobile (390px) with no horizontal overflow, reduced-motion path, dev server, zero console errors.
 - Not exercised: real touch scrolling and low-end device performance.
 
+### Update (same day): separate Contact page with an email form
+- **New route `/contact`** (`pages/ContactPage.vue`, `components/ContactForm.vue`): same look as the closing CTA (big tilt-line heading, info column with email + "Book 15 minutes") with a form on the right: Name, Email, Message. Underline-only inputs, lime focus line, inline errors, focus moves to the first invalid field, success state ("Thanks, <first name>."), clear failure messages with a mailto fallback, honeypot field against bots. Nav "Contact", the nav CTA, the hero "Let's talk" and the home "Start a conversation" button all go to `/contact`. The home page keeps its closing CTA section.
+- **How the email is sent:** `api/contact.js`, a Vercel serverless function that calls the Resend API. The same file is served locally by a small middleware in `vite.config.js`, so `npm run dev` behaves like production. Validates server-side (name, email, 10 to 4000 char message), HTML-escapes the body, strips newlines from name/email, sets `reply_to` to the visitor so you can reply directly.
+- **Footer:** the "Portfolio / Framer" link and the `framer` field were removed. (The word "Framer" still appears once in the AI tools ticker because it is one of your listed tools.)
+- **Bug fixed along the way:** `v-split` used `clamp(top 85%)`, which kept any heading already on screen invisible until the first scroll. Now plain `top 85%`; all split text also waits for the loader so reveals are never wasted behind the curtain.
+- **Vercel rewrite** now excludes `/api/*`.
+
+**To make the form actually deliver mail (not done yet, needs your account):**
+1. Create a free Resend account with the inbox you want to receive at (the shared sender `onboarding@resend.dev` can only deliver to the email the Resend account was created with), then create an API key.
+2. Local: copy `.env.example` to `.env.local` and set `RESEND_API_KEY`. Restart `npm run dev`.
+3. Vercel: Project Settings > Environment Variables > add `RESEND_API_KEY` (and optionally `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`), then redeploy.
+Until the key exists, the form answers "not connected yet, please email directly" instead of pretending to send.
+
+Verified: handler (405, bad body, validation, honeypot, 503 without key, success payload to Resend, provider and network failures), live dev route, page in Edge (validation, focus, unavailable message, mocked success, nav state, mobile, no overflow). **Not verified: a real email arriving**, because no API key was available.
+
 ### Design system (superseded by the revert above)
 Palette and font switched to the system specified in the brief: bg `#080C0E`, surface `#10171A` / `#172125`, primary `#4F7A8A`, hover `#638F9F`, accent `#22D3EE`, text `#F4F7F8`, body `#D3DCE0`, muted `#8A989E`, border `#263237`, font Geist (Inter fallback).
 - **Note:** the previous iteration used lime on near-black. The brief said "keep the existing system" but listed these teal/cyan values, so the listed values were applied. Say if you actually wanted lime kept.

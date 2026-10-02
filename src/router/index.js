@@ -6,6 +6,7 @@ const HOME_DESC = 'Product Analyst & Designer working across product strategy, U
 
 const routes = [
   { path: '/', name: 'home', component: () => import('../pages/HomePage.vue'), meta: { title: `${SITE} — Product Analyst & Designer`, description: HOME_DESC } },
+  { path: '/contact', name: 'contact', component: () => import('../pages/ContactPage.vue'), meta: { title: `Contact — ${SITE}`, description: 'Get in touch with Fardin Mazumder, Product Analyst & Designer. Send a message or book a call.' } },
   { path: '/work', name: 'work', component: () => import('../pages/WorkIndexPage.vue'), meta: { title: `Work — ${SITE}`, description: 'Design, Build, and Design & Build projects by Fardin Mazumder, Product Analyst & Designer.' } },
   {
     path: '/work/:slug',

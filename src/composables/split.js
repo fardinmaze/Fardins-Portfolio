@@ -48,12 +48,12 @@ export const vSplit = {
             ease: EASE,
             delay: opts.delay || 0,
             onStart: () => { played = true },
-            ...(opts.trigger === 'load' ? {} : { scrollTrigger: { trigger: el, start: 'clamp(top 85%)', once: true } }),
+            ...(opts.trigger === 'load' ? {} : { scrollTrigger: { trigger: el, start: 'top 85%', once: true } }),
           })
         },
       })
     }
-    const start = () => (opts.trigger === 'load' ? loaderDone(setup) : setup())
+    const start = () => loaderDone(setup) // never reveal behind the loader curtain
     document.fonts?.ready ? document.fonts.ready.then(start, start) : start()
   },
   unmounted(el) {

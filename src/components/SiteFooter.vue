@@ -19,7 +19,6 @@ const year = new Date().getFullYear()
         <ul class="links label">
           <li><a :href="profile.linkedin" target="_blank" rel="noopener">LinkedIn ↗</a></li>
           <li><a :href="`mailto:${profile.email}`">Email ↗</a></li>
-          <li><a :href="profile.framer" target="_blank" rel="noopener">Portfolio / Framer ↗</a></li>
         </ul>
       </div>
       <p class="label muted copy">© {{ year }} FARDIN</p>
