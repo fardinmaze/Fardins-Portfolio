@@ -104,6 +104,23 @@ Verified: handler (405, bad body, validation, honeypot, 503 without key, success
 - **Afsha Hossain:** no website could be found (web search returned nothing; common domains and vercel/netlify names did not resolve). Its images are still placeholders until the owner supplies the address.
 - Verified in Edge (static build): filters and chip counts, every category tag, Balanti images (5/5 load), Visit site link, home stack shows the real Balanti cover, mobile no overflow, zero console errors.
 
+### Update (same day): Go for Change screens from Figma
+- Read the open Go for Change Figma file through the Figma desktop connection (pages: Cover, Internal Only Canvas, Design Components & Assets, **Preview Design**). Screens live on "Preview Design": Desktop View (landing), Changemakers, Initiatives, Initiatives Details Page, Feed (1920 wide), User/Changemaker profiles, Auth pages, Contact Us, About Us, What We Offer, Privacy Policy, Our Team, Content Guidelines, FAQ, plus an "Updated Designs" section and an empty iPhone 13 mini frame.
+- **Resolution limit:** the Figma screenshot tool caps the longest side at 1024 px, so a 1440-wide screen comes back at about 71% scale. Full tall pages would be unreadable, so each screen was captured **section by section** (header, breadcrumb/title, content blocks) and stitched with sharp into page-top views at 1024 px wide. Sources are kept in the Figma file; nothing was redrawn.
+- Six WebP images in `public/work/go-for-change/` (~475 KB total): 01 landing hero (cover), 02 Changemakers directory, 03 Initiatives, 04 Initiative details, 05 Changemaker profile, 06 "Why we Go For Change" section. Placed: cover on cards/stack/next; 06 under UX Direction; 02 and 03 under Organizing a Complex Ecosystem; 04 and 05 under Outcome. The old placeholder is gone.
+- **Privacy:** the profile screen showed an individual's name, email and phone in its Contact line (sample or real data from the NGO). That one value is blurred in 05-profile.webp.
+- Not used: Feed, Auth pages, Contact Us, About/Offer/Privacy/Team/FAQ screens, the "Updated Designs" section, and the iPhone frame (empty template, no mobile design). Easy to add.
+- For sharper images, export PNG at 2x from Figma (or share the file link) and drop them over these files.
+- Verified in Edge (static build): 6/6 images load, cards and home stack show the real cover, mobile no overflow, zero console errors.
+
+### Update (2026-10-03): Balanti hero video and thumbnail
+- From the owner's Downloads: `web-hero.mp4` (1920x1080, 26.7 s, 11.1 MB) is now the hero at the top of the Balanti page, and `videoframe_1744.png` (the closing Balanti logo frame) is the thumbnail used on the work cards, the home stack, next-project block and as the video's poster. Files: `public/work/balanti/web-hero.mp4`, `00-thumbnail.webp` (1600x900, 35 KB).
+- New `components/project/VideoHero.vue`: muted, looping, `playsinline`, `preload="metadata"`. Plays when 40% visible and pauses when scrolled away; does **not** autoplay with `prefers-reduced-motion` (stays on the poster until Play is pressed); visible Pause/Play button (aria-pressed, labelled). Any project can use it by adding `heroVideo: { src, poster, w, h, label }`.
+- The earlier homepage screenshot (01-home) moved into the Shopping Journey figure so it is still used.
+- The video is committed as-is (11 MB, under GitHub's 100 MB limit). If page weight matters, a re-encode at 1280 px / lower bitrate would cut it to about 3 to 4 MB; ffmpeg is not installed here.
+- Verified in Edge (static build with range requests): autoplay, pause/play button, pause when off-screen and resume on return, reduced-motion path, thumbnail on card and stack, mobile no overflow, zero console errors.
+- The Vite dev server was stopped again by the system for low memory; not restarted.
+
 ### Design system (superseded by the revert above)
 Palette and font switched to the system specified in the brief: bg `#080C0E`, surface `#10171A` / `#172125`, primary `#4F7A8A`, hover `#638F9F`, accent `#22D3EE`, text `#F4F7F8`, body `#D3DCE0`, muted `#8A989E`, border `#263237`, font Geist (Inter fallback).
 - **Note:** the previous iteration used lime on near-black. The brief said "keep the existing system" but listed these teal/cyan values, so the listed values were applied. Say if you actually wanted lime kept.

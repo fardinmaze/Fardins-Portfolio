@@ -46,6 +46,7 @@ export const balantiStory = [
       {
         t: 'figure',
         images: [
+          shot('01-home.webp', 'Balanti home page with Formal wear, Boot and Casual wear collections and new arrivals', 1800, 1125),
           shot('02-catalogue.webp', 'Balanti men catalogue with category, price and colour filters and a grid of leather shoes', 1800, 1125),
           shot('03-product.webp', 'Balanti product page for the Executive Cap-Toe with image gallery, colour, size and purchase options', 1800, 1125),
         ],

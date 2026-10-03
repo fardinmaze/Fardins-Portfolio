@@ -4,6 +4,7 @@ import CategoryTag from '../CategoryTag.vue'
 import ShotFrame from '../ShotFrame.vue'
 import CountUp from '../CountUp.vue'
 import StoryBlocks from './StoryBlocks.vue'
+import VideoHero from './VideoHero.vue'
 
 const props = defineProps({ project: { type: Object, required: true } })
 
@@ -80,7 +81,10 @@ const images = computed(() => props.project.images || [])
 
       <!-- right: long-form story (when a project has one) -->
       <div v-if="project.story" class="shots">
-        <figure v-if="project.cover" class="shot full rise" style="--i: 3">
+        <div v-if="project.heroVideo" class="shot-video full rise" style="--i: 3">
+          <VideoHero v-bind="project.heroVideo" />
+        </div>
+        <figure v-else-if="project.cover" class="shot full rise" style="--i: 3">
           <img :src="project.cover.src" :alt="project.cover.alt" :width="project.cover.w" :height="project.cover.h" decoding="async" />
         </figure>
         <div v-else class="shot full rise" style="--i: 3"><ShotFrame :name="project.name" label="hero screenshot" ratio="16 / 10" /></div>
@@ -143,6 +147,7 @@ h1 { font-size: clamp(2.2rem, 3.6vw, 3.4rem); line-height: 0.98; letter-spacing:
 .shot img { width: 100%; height: auto; display: block; }
 .shot :deep(.shot) { border: 0; border-radius: 0; }
 .story-col { grid-column: 1 / -1; }
+.shot-video { grid-column: 1 / -1; }
 
 @media (max-width: 899px) {
   .layout { grid-template-columns: 1fr; row-gap: 40px; }

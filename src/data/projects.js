@@ -74,6 +74,7 @@ export const projects = [
     name: 'Go for Change',
     headline: 'Turning community initiatives into a digital platform.',
     pageHeadline: 'Making social impact easier to discover, understand, and support.',
+    cover: img('go-for-change', '01-landing.webp', 'Go for Change landing page: Discover Stories of Change. Connect with Social Good.', 1024, 540),
     description:
       'Go for Change is a social-tech platform designed to bring NGOs, changemakers, social initiatives, donors, institutions, and communities into a more connected digital ecosystem.',
     intro: goforchangeIntro,
@@ -127,7 +128,9 @@ export const projects = [
     stack: 'Vue.js · Python/Django · Claude Code',
     location: 'Australia',
     url: 'https://balanti.com.au/',
-    cover: img('balanti', '01-home.webp', 'Balanti home page with Formal wear, Boot and Casual wear collections and new arrivals', 1800, 1125),
+    // Thumbnail = a frame from the hero video (the closing brand shot). The video itself plays at the top of the detail page.
+    cover: img('balanti', '00-thumbnail.webp', 'Balanti: a man walks in black suede boots with the Balanti logo, Shoemakers since 2000', 1600, 900),
+    heroVideo: { src: '/work/balanti/web-hero.mp4', poster: '/work/balanti/00-thumbnail.webp', w: 1920, h: 1080, label: 'Balanti hero video: walking in leather boots, ending on the Balanti logo' },
   },
   {
     slug: 'design-system-bootstrapper',

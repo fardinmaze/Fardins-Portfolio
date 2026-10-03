@@ -3,6 +3,10 @@
 // Experience, From Organization to Story, Designing Trust, Visual Design, Product Experience journey, Design System,
 // What I Focused On. They can be added back as new sections.
 
+// Screens exported from the Go for Change Figma file (Preview Design page), stitched into page-top views.
+// The personal contact line on the profile screen is blurred.
+const shot = (file, alt, w, h) => ({ src: `/work/go-for-change/${file}`, alt, w, h, span: 'full' })
+
 export const goforchangeIntro = [
   'Go for Change is a social-tech platform designed to bring NGOs, changemakers, social initiatives, donors, institutions, and communities into a more connected digital ecosystem.',
   'The platform gives organizations a space to present their initiatives, share stories and impact, build visibility, and connect with people who want to engage with social change.',
@@ -55,6 +59,7 @@ export const goforchangeStory = [
       },
       { t: 'p', x: 'This creates a simple product loop:' },
       { t: 'chain', x: ['Discover', 'Understand', 'Engage'] },
+      { t: 'figure', images: [shot('06-why-we.webp', 'Go for Change landing page section: Why we Go For Change, with Connect, Support and Sustain', 1024, 503)] },
     ],
   },
   {
@@ -65,7 +70,13 @@ export const goforchangeStory = [
       { t: 'p', x: 'The platform can bring together:' },
       { t: 'list', x: ['Organizations', 'Initiatives', 'Stories', 'Events', 'Opportunities', 'Research', 'Publications', 'Social-impact content'] },
       { t: 'p', x: 'The challenge was to provide enough structure without making the platform feel like an administrative database.' },
-      { t: 'figure', placeholder: 'key screens' },
+      {
+        t: 'figure',
+        images: [
+          shot('02-changemakers.webp', 'Go for Change Changemakers directory with organisation cards', 1024, 802),
+          shot('03-initiatives.webp', 'Go for Change Initiatives list with initiative cards', 1024, 694),
+        ],
+      },
     ],
   },
   {
@@ -96,6 +107,13 @@ export const goforchangeStory = [
     blocks: [
       { t: 'p', x: 'Go for Change became a digital platform for presenting and discovering social-impact work rather than a conventional organization website.' },
       { t: 'p', x: 'The experience provides a structured environment where organizations and changemakers can showcase initiatives, stories, and other content while creating pathways for broader engagement.' },
+      {
+        t: 'figure',
+        images: [
+          shot('04-initiative-details.webp', 'Go for Change initiative detail page for Safe Net with photo, description and related stories', 1024, 871),
+          shot('05-profile.webp', 'Go for Change changemaker profile for an NGO with banner, details, bio and stories', 1024, 750),
+        ],
+      },
     ],
   },
   {
