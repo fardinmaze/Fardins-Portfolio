@@ -40,7 +40,7 @@ onBeforeUnmount(() => io?.disconnect())
 </script>
 
 <template>
-  <figure class="vh">
+  <figure class="vh" :class="{ portrait: h > w }" :style="{ '--ar': `${w} / ${h}` }">
     <video
       ref="video" :src="src" :poster="poster || undefined" :width="w" :height="h"
       muted loop playsinline preload="metadata" disablepictureinpicture :aria-label="label"
@@ -55,6 +55,9 @@ onBeforeUnmount(() => io?.disconnect())
 <style scoped>
 .vh { position: relative; margin: 0; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; background: var(--surface); }
 video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+/* Portrait video (e.g. a 9:16 reel): show it whole, centred, capped to the viewport height. */
+.vh.portrait { display: flex; justify-content: center; background: #000; }
+.vh.portrait video { width: auto; max-width: 100%; height: min(82vh, 860px); aspect-ratio: var(--ar); object-fit: contain; }
 .ctl {
   position: absolute; right: 14px; bottom: 14px; display: inline-flex; align-items: center; gap: 8px;
   padding: 9px 12px; border-radius: 4px; background: rgba(10, 10, 10, 0.72); color: var(--text);

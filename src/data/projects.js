@@ -20,6 +20,7 @@ import { goforchangeIntro, goforchangeStory } from './stories/goforchange'
 import { neduaiIntro, neduaiStory } from './stories/neduai'
 import { balantiIntro, balantiStory } from './stories/balanti'
 import { afshaIntro, afshaStory } from './stories/afshahossain'
+import { spicedineIntro, spicedineStory } from './stories/spicedine'
 
 export const CATEGORIES = {
   design: { key: 'design', label: 'Design' },
@@ -133,6 +134,27 @@ export const projects = [
     heroVideo: { src: '/work/balanti/web-hero.mp4', poster: '/work/balanti/00-thumbnail.webp', w: 1920, h: 1080, label: 'Balanti hero video: walking in leather boots, ending on the Balanti logo' },
   },
   {
+    slug: 'spice-dine',
+    cat: 'design-build',
+    name: 'Spice Dine',
+    headline: 'Turning a Bangladeshi kitchen into an online ordering experience.',
+    description: 'A brand-led restaurant website for a halal Bangladeshi kitchen in Brisbane, designed and built to showcase the menu and send customers straight to ordering.',
+    intro: spicedineIntro,
+    story: spicedineStory,
+    // TODO owner: confirm role and year.
+    role: 'Web Design · Frontend Development · AI-Assisted Development',
+    tags: ['Web Design', 'Vue.js', 'Restaurant'],
+    pageTags: ['Web Design', 'UX/UI', 'Frontend Development', 'AI-Assisted Development'],
+    year: '2026',
+    platform: 'Restaurant website',
+    stack: 'Vue 3 · Vite',
+    location: 'Brisbane, Australia',
+    url: 'https://spice-dine.vercel.app/',
+    // Thumbnail = poster frame of the site's hero video (spice-dine/public/videos/hero-poster.webp). The same video plays at the top of the detail page.
+    cover: img('spice-dine', '00-thumbnail.webp', 'Spice Dine hero video: the Spice Dine logo over the Brisbane skyline at sunset', 1280, 720),
+    heroVideo: { src: '/work/spice-dine/hero.mp4', poster: '/work/spice-dine/00-thumbnail.webp', w: 1280, h: 720, label: 'Spice Dine hero video: the Spice Dine logo over the Brisbane skyline' },
+  },
+  {
     slug: 'design-system-bootstrapper',
     cat: 'build',
     name: 'Design System Bootstrapper',
@@ -206,7 +228,7 @@ export const projects = [
 
 export const featuredSlugs = ['quickcv', 'balanti', 'go-for-change', 'reportmate']
 export const experimentSlugs = ['afsha-hossain', 'design-system-bootstrapper', 'hikmah']
-export const additionalSlugs = ['nedu-ai', 'portulika']
+export const additionalSlugs = ['spice-dine', 'nedu-ai', 'portulika']
 
 // Earlier work from the previous Framer portfolio. Listed, no dedicated page.
 export const otherWork = [

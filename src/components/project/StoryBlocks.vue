@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import CountUp from '../CountUp.vue'
 import ShotFrame from '../ShotFrame.vue'
+import VideoHero from './VideoHero.vue'
 
 const props = defineProps({
   sections: { type: Array, required: true },
@@ -94,6 +95,11 @@ const numbers = computed(() => {
               <p v-for="(t, k) in paras(x.p)" :key="k">{{ t }}</p>
               <ol v-if="x.chain" class="chain small"><li v-for="c in x.chain" :key="c">{{ c }}</li></ol>
             </article>
+          </div>
+
+          <!-- looping video (same player as the project hero): { t: 'video', src, poster, w, h, label } -->
+          <div v-else-if="b.t === 'video'" class="video-blk">
+            <VideoHero :src="b.src" :poster="b.poster" :w="b.w" :h="b.h" :label="b.label" />
           </div>
 
           <!-- screenshots, or a clearly marked placeholder -->
